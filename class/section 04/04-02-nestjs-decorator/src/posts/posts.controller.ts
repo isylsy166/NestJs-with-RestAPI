@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { PostsService } from './posts.service';
 
 interface Post {
   author: string;
@@ -9,16 +9,11 @@ interface Post {
   commentCount: number;
 }
 
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+@Controller('posts')
+export class PostsController {
+  constructor(private readonly postsService: PostsService) {}
 
   @Get()
-  getHome() {
-    return 'Home Page';
-  }
-
-  @Get('post')
   getPost(): Post {
     return {
       author: 'newjeans_official',
@@ -27,10 +22,5 @@ export class AppController {
       likeCount: 1000000,
       commentCount: 5000,
     };
-  }
-
-  @Get('user')
-  getUser() {
-    return 'User Page';
   }
 }
