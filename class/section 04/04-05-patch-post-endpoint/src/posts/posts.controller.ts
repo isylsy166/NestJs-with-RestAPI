@@ -41,13 +41,11 @@ let posts: PostModel[] = [
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  //조회
   @Get()
   getPosts() {
     return posts;
   }
 
-  // 선택한 값 조회
   // GET /posts/:id
   @Get(':id')
   getPost(@Param('id') id: string) {
@@ -58,7 +56,6 @@ export class PostsController {
     return post;
   }
 
-  //등록
   @Post()
   postPosts(
     @Body('author') author: string,
@@ -79,5 +76,34 @@ export class PostsController {
     return post;
   }
 
+  //수정
+  @Put(':id')
+  putPosts(
+    @Param('id') id: string,
+    @Body('author') author?: string,
+    @Body('title') title?: string,
+    @Body('content') content?: string,
+  ) {
+    const post = posts.find((post) => post.id === +id);
 
+    if (!post) {
+      throw new NotFoundException();
+    }
+
+    if (author) {
+      post.author = author;
+    }
+
+    if (title) {
+      post.title = title;
+    }
+
+    if (content) {
+      post.content = content;
+    }
+
+    posts = posts.map((prevPost) => (prevPost.id === +id ? post : prevPost));
+
+    return post;
+  }
 }
