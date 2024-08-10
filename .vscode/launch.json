@@ -1,0 +1,23 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "NestJs Debug",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["start:debug"],
+      "console": "integratedTerminal", //vscode 터미널 사용
+      "restart": true,
+      "port": 9229, // nestJs 기본 디버깅 포트
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/class/section 07/07-01-nestjs-typeorm/src/app.controller.ts",
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "cwd": "${workspaceFolder}/class/section 07/07-01-nestjs-typeorm"
+    }
+  ]
+}
